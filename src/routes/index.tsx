@@ -20,9 +20,23 @@ export const Route = createFileRoute("/")({
 
 const types: { value: string; base: number }[] = [
   { value: "Флорариум", base: 4500 }, { value: "Моссариум", base: 3900 },
-  { value: "Панно", base: 8500 }, { value: "Круг", base: 12000 }, { value: "Бонсай", base: 6500 },
+  { value: "Панно", base: 8500 }, { value: "Панно с логотипом", base: 16000 },
+  { value: "Круг", base: 12000 }, { value: "Бонсай", base: 6500 },
+  { value: "Композиция на заказ", base: 9500 },
 ];
-const sizes: { value: string; factor: number }[] = [{ value: "Маленький", factor: 1 }, { value: "Средний", factor: 1.6 }, { value: "Крупный", factor: 2.5 }];
+const sizes: { value: string; factor: number }[] = [
+  { value: "Мини", factor: 0.75 }, { value: "Маленький", factor: 1 },
+  { value: "Средний", factor: 1.6 }, { value: "Крупный", factor: 2.5 },
+  { value: "Очень крупный", factor: 3.6 },
+];
+const fillings: { value: string; factor: number }[] = [
+  { value: "Базовое", factor: 1 }, { value: "С камнем и корягой", factor: 1.15 },
+  { value: "Редкие растения", factor: 1.35 }, { value: "Авторский сюжет", factor: 1.55 },
+];
+const extras: { value: string; add: number }[] = [
+  { value: "Без подсветки", add: 0 }, { value: "Тёплая подсветка", add: 2500 },
+  { value: "Подсветка + кашпо", add: 4200 }, { value: "Подсветка и монтаж", add: 6500 },
+];
 const labels: Record<string, string> = { florarium: "Флорариумы", mossarium: "Моссариумы", panel: "Панно из мха", circle: "Круги с подсветкой", bonsai: "Бонсай" };
 
 function Index() {
