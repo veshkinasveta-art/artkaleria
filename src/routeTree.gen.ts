@@ -72,9 +72,9 @@ const CatalogIndexRoute = CatalogIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const CatalogSlugRoute = CatalogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => CatalogRoute,
+  id: '/catalog/$slug',
+  path: '/catalog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -169,6 +169,7 @@ export interface RootRouteChildren {
   OfferRoute: typeof OfferRoute
   PrivacyRoute: typeof PrivacyRoute
   WorkshopsRoute: typeof WorkshopsRoute
+  CatalogSlugRoute: typeof CatalogSlugRoute
   CatalogIndexRoute: typeof CatalogIndexRoute
 }
 
@@ -246,10 +247,10 @@ declare module '@tanstack/react-router' {
     }
     '/catalog/$slug': {
       id: '/catalog/$slug'
-      path: '/$slug'
+      path: '/catalog/$slug'
       fullPath: '/catalog/$slug'
       preLoaderRoute: typeof CatalogSlugRouteImport
-      parentRoute: typeof CatalogRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -264,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   OfferRoute: OfferRoute,
   PrivacyRoute: PrivacyRoute,
   WorkshopsRoute: WorkshopsRoute,
+  CatalogSlugRoute: CatalogSlugRoute,
   CatalogIndexRoute: CatalogIndexRoute,
 }
 export const routeTree = rootRouteImport
