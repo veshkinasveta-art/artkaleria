@@ -14,16 +14,137 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          admin_note: string
+          created_at: string
+          customer_name: string
+          details: Json
+          email: string | null
+          id: string
+          kind: Database["public"]["Enums"]["lead_kind"]
+          message: string
+          phone: string
+          status: Database["public"]["Enums"]["lead_status"]
+          total: number | null
+          updated_at: string
+        }
+        Insert: {
+          admin_note?: string
+          created_at?: string
+          customer_name: string
+          details?: Json
+          email?: string | null
+          id?: string
+          kind: Database["public"]["Enums"]["lead_kind"]
+          message?: string
+          phone: string
+          status?: Database["public"]["Enums"]["lead_status"]
+          total?: number | null
+          updated_at?: string
+        }
+        Update: {
+          admin_note?: string
+          created_at?: string
+          customer_name?: string
+          details?: Json
+          email?: string | null
+          id?: string
+          kind?: Database["public"]["Enums"]["lead_kind"]
+          message?: string
+          phone?: string
+          status?: Database["public"]["Enums"]["lead_status"]
+          total?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      products: {
+        Row: {
+          care: string
+          category: string
+          created_at: string
+          description: string
+          details: string
+          featured: boolean
+          id: string
+          image_key: string
+          name: string
+          price: number
+          published: boolean
+          sizes: string[]
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          care?: string
+          category: string
+          created_at?: string
+          description: string
+          details?: string
+          featured?: boolean
+          id?: string
+          image_key?: string
+          name: string
+          price: number
+          published?: boolean
+          sizes?: string[]
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          care?: string
+          category?: string
+          created_at?: string
+          description?: string
+          details?: string
+          featured?: boolean
+          id?: string
+          image_key?: string
+          name?: string
+          price?: number
+          published?: boolean
+          sizes?: string[]
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
+      lead_kind: "order" | "estimate" | "workshop" | "certificate" | "callback"
+      lead_status: "new" | "in_progress" | "completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +271,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+      lead_kind: ["order", "estimate", "workshop", "certificate", "callback"],
+      lead_status: ["new", "in_progress", "completed"],
+    },
   },
 } as const

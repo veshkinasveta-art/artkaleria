@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789549875281,
+      "tag": "0000_create_kaleria_store",
+      "breakpoints": true
+    }
+  ]
 }
