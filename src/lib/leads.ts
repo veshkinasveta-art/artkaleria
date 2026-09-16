@@ -8,7 +8,7 @@ export const leadSchema = z.object({
   email: z.string().trim().email("Проверьте почту").max(255).optional().or(z.literal("")),
   message: z.string().trim().max(2000).default(""),
   total: z.number().int().nonnegative().nullable().default(null),
-  details: z.record(z.unknown()).default({}),
+  details: z.record(z.union([z.string(), z.number(), z.boolean(), z.null()])).default({}),
 });
 
 export async function submitLead(input: z.input<typeof leadSchema>) {
