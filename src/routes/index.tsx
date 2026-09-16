@@ -4,7 +4,7 @@ import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LeadForm } from "@/components/lead-form";
 import { fallbackProducts, formatPrice, productImages } from "@/lib/store-data";
-import founderPhoto from "@/assets/kaleria-founder-retouched.jpg";
+import founderPhoto from "@/assets/kaleria-founder-studio.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
