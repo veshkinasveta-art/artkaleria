@@ -13,12 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CartRouteImport } from './routes/cart'
-import { Route as CatalogRouteImport } from './routes/catalog'
 import { Route as CertificatesRouteImport } from './routes/certificates'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as OfferRouteImport } from './routes/offer'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as WorkshopsRouteImport } from './routes/workshops'
+import { Route as CatalogIndexRouteImport } from './routes/catalog.index'
 import { Route as CatalogSlugRouteImport } from './routes/catalog.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -39,11 +39,6 @@ const AuthRoute = AuthRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CatalogRoute = CatalogRouteImport.update({
-  id: '/catalog',
-  path: '/catalog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CertificatesRoute = CertificatesRouteImport.update({
@@ -71,10 +66,15 @@ const WorkshopsRoute = WorkshopsRouteImport.update({
   path: '/workshops',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CatalogIndexRoute = CatalogIndexRouteImport.update({
+  id: '/catalog/',
+  path: '/catalog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CatalogSlugRoute = CatalogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => CatalogRoute,
+  id: '/catalog/$slug',
+  path: '/catalog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -82,26 +82,26 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
-  '/catalog': typeof CatalogRouteWithChildren
   '/certificates': typeof CertificatesRoute
   '/delivery': typeof DeliveryRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
   '/workshops': typeof WorkshopsRoute
   '/catalog/$slug': typeof CatalogSlugRoute
+  '/catalog/': typeof CatalogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
-  '/catalog': typeof CatalogRouteWithChildren
   '/certificates': typeof CertificatesRoute
   '/delivery': typeof DeliveryRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
   '/workshops': typeof WorkshopsRoute
   '/catalog/$slug': typeof CatalogSlugRoute
+  '/catalog': typeof CatalogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -109,13 +109,13 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/cart': typeof CartRoute
-  '/catalog': typeof CatalogRouteWithChildren
   '/certificates': typeof CertificatesRoute
   '/delivery': typeof DeliveryRoute
   '/offer': typeof OfferRoute
   '/privacy': typeof PrivacyRoute
   '/workshops': typeof WorkshopsRoute
   '/catalog/$slug': typeof CatalogSlugRoute
+  '/catalog/': typeof CatalogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -124,39 +124,39 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/cart'
-    | '/catalog'
     | '/certificates'
     | '/delivery'
     | '/offer'
     | '/privacy'
     | '/workshops'
     | '/catalog/$slug'
+    | '/catalog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
     | '/auth'
     | '/cart'
-    | '/catalog'
     | '/certificates'
     | '/delivery'
     | '/offer'
     | '/privacy'
     | '/workshops'
     | '/catalog/$slug'
+    | '/catalog'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/auth'
     | '/cart'
-    | '/catalog'
     | '/certificates'
     | '/delivery'
     | '/offer'
     | '/privacy'
     | '/workshops'
     | '/catalog/$slug'
+    | '/catalog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -164,12 +164,13 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   CartRoute: typeof CartRoute
-  CatalogRoute: typeof CatalogRouteWithChildren
   CertificatesRoute: typeof CertificatesRoute
   DeliveryRoute: typeof DeliveryRoute
   OfferRoute: typeof OfferRoute
   PrivacyRoute: typeof PrivacyRoute
   WorkshopsRoute: typeof WorkshopsRoute
+  CatalogSlugRoute: typeof CatalogSlugRoute
+  CatalogIndexRoute: typeof CatalogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -200,13 +201,6 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/catalog': {
-      id: '/catalog'
-      path: '/catalog'
-      fullPath: '/catalog'
-      preLoaderRoute: typeof CatalogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/certificates': {
@@ -244,38 +238,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkshopsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/catalog/': {
+      id: '/catalog/'
+      path: '/catalog'
+      fullPath: '/catalog/'
+      preLoaderRoute: typeof CatalogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catalog/$slug': {
       id: '/catalog/$slug'
-      path: '/$slug'
+      path: '/catalog/$slug'
       fullPath: '/catalog/$slug'
       preLoaderRoute: typeof CatalogSlugRouteImport
-      parentRoute: typeof CatalogRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface CatalogRouteChildren {
-  CatalogSlugRoute: typeof CatalogSlugRoute
-}
-
-const CatalogRouteChildren: CatalogRouteChildren = {
-  CatalogSlugRoute: CatalogSlugRoute,
-}
-
-const CatalogRouteWithChildren =
-  CatalogRoute._addFileChildren(CatalogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   CartRoute: CartRoute,
-  CatalogRoute: CatalogRouteWithChildren,
   CertificatesRoute: CertificatesRoute,
   DeliveryRoute: DeliveryRoute,
   OfferRoute: OfferRoute,
   PrivacyRoute: PrivacyRoute,
   WorkshopsRoute: WorkshopsRoute,
+  CatalogSlugRoute: CatalogSlugRoute,
+  CatalogIndexRoute: CatalogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
