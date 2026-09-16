@@ -3,6 +3,7 @@ import { Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
+import { AdminLoginDialog } from "@/components/admin-login-dialog";
 
 const links = [
   ["/catalog", "Каталог"], ["/workshops", "Мастер-классы"], ["/certificates", "Сертификаты"], ["/delivery", "Доставка"],
