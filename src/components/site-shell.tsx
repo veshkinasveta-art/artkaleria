@@ -3,6 +3,7 @@ import { Menu, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
+import { AdminLoginDialog } from "@/components/admin-login-dialog";
 
 const links = [
   ["/catalog", "Каталог"], ["/workshops", "Мастер-классы"], ["/certificates", "Сертификаты"], ["/delivery", "Доставка"],
@@ -17,6 +18,7 @@ export function SiteHeader() {
       <nav className="hidden items-center gap-7 lg:flex">{links.map(([to, label]) => <Link key={to} to={to} className="text-sm text-foreground/75 transition-colors hover:text-primary" activeProps={{ className: "text-primary" }}>{label}</Link>)}</nav>
       <div className="flex items-center gap-2">
         <Button asChild variant="ghost" size="icon" className="relative" aria-label="Корзина"><Link to="/cart"><ShoppingBag />{count > 0 && <span className="absolute -right-1 -top-1 grid size-5 place-items-center rounded-full bg-accent text-[10px] text-accent-foreground">{count}</span>}</Link></Button>
+        <AdminLoginDialog asButton className="hidden md:inline-flex" />
         <Button asChild className="hidden sm:inline-flex"><Link to="/" hash="contact">Оставить заявку</Link></Button>
         <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen((value) => !value)} aria-label={open ? "Закрыть меню" : "Открыть меню"}>{open ? <X /> : <Menu />}</Button>
       </div>
@@ -32,6 +34,6 @@ export function SiteFooter() {
       <div className="grid gap-2 text-sm"><Link to="/catalog">Каталог</Link><Link to="/workshops">Мастер-классы</Link><Link to="/certificates">Сертификаты</Link><Link to="/delivery">Доставка</Link></div>
       <div className="grid gap-2 text-sm"><a href="tel:+79266045274">+7 926 604-52-74</a><a href="mailto:hello@kaleria.studio">hello@kaleria.studio</a><p>Москва, Большая Никитская, 12</p><p>Пн–Сб, 10:00–19:00</p></div>
     </div>
-    <div className="mx-auto flex max-w-[1440px] flex-wrap justify-between gap-4 border-t border-primary-foreground/20 px-5 py-5 text-xs text-primary-foreground/60 lg:px-10"><p>© 2026 Арт-студия Калерия</p><div className="flex gap-5"><Link to="/privacy">Конфиденциальность</Link><Link to="/offer">Оферта</Link><Link to="/auth">Вход</Link></div></div>
+    <div className="mx-auto flex max-w-[1440px] flex-wrap justify-between gap-4 border-t border-primary-foreground/20 px-5 py-5 text-xs text-primary-foreground/60 lg:px-10"><p>© 2026 Арт-студия Калерия</p><div className="flex gap-5"><Link to="/privacy">Конфиденциальность</Link><Link to="/offer">Оферта</Link><AdminLoginDialog className="underline-offset-4 hover:underline" /></div></div>
   </footer>;
 }
