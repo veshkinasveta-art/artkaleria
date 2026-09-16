@@ -19,6 +19,8 @@
  */
 
 @theme inline {
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Cormorant Garamond", serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,13 +64,24 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.25rem;
+  --background: oklch(0.975 0.014 91);
+  --foreground: oklch(0.245 0.033 133);
+  --card: oklch(0.99 0.009 92);
+  --card-foreground: oklch(0.245 0.033 133);
+  --popover: oklch(0.99 0.009 92);
+  --popover-foreground: oklch(0.245 0.033 133);
+  --primary: oklch(0.29 0.055 142);
+  --primary-foreground: oklch(0.97 0.014 91);
+  --secondary: oklch(0.88 0.035 119);
+  --secondary-foreground: oklch(0.25 0.04 137);
+  --muted: oklch(0.93 0.018 92);
+  --muted-foreground: oklch(0.49 0.028 92);
+  --accent: oklch(0.68 0.063 85);
+  --accent-foreground: oklch(0.22 0.03 110);
+  --border: oklch(0.83 0.025 94);
+  --input: oklch(0.78 0.03 94);
+  --ring: oklch(0.4 0.06 142);
   --primary: oklch(0.208 0.042 265.755);
   --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
