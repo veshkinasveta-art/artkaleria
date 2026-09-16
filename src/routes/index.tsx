@@ -40,10 +40,12 @@ const extras: { value: string; add: number }[] = [
 const labels: Record<string, string> = { florarium: "Флорариумы", mossarium: "Моссариумы", panel: "Панно из мха", circle: "Круги с подсветкой", bonsai: "Бонсай" };
 
 function Index() {
-  const [kind, setKind] = useState({ value: "Флорариум", base: 4500 });
-  const [size, setSize] = useState({ value: "Средний", factor: 1.6 });
+  const [kind, setKind] = useState(types[0]!);
+  const [size, setSize] = useState(sizes[2]!);
+  const [filling, setFilling] = useState(fillings[0]!);
+  const [extra, setExtra] = useState(extras[0]!);
   const [transfer, setTransfer] = useState(0);
-  const estimate = useMemo(() => Math.round(kind.base * size.factor / 100) * 100, [kind, size]);
+  const estimate = useMemo(() => Math.round((kind.base * size.factor * filling.factor + extra.add) / 100) * 100, [kind, size, filling, extra]);
   return <main>
     <section className="hero-grid">
       <div className="hero-photo"><img src={founderPhoto} alt="Основательница арт-студии Калерия с двумя композициями из мха" /></div>
