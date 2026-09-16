@@ -4,7 +4,7 @@ import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LeadForm } from "@/components/lead-form";
 import { fallbackProducts, formatPrice, productImages } from "@/lib/store-data";
-import founderAsset from "@/assets/kaleria-founder-compositions.jpg.asset.json";
+import founderPhoto from "@/assets/kaleria-founder-retouched.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -32,7 +32,7 @@ function Index() {
   const estimate = useMemo(() => Math.round(kind.base * size.factor / 100) * 100, [kind, size]);
   return <main>
     <section className="hero-grid">
-      <div className="hero-photo"><img src={founderAsset.url} alt="Основательница арт-студии Калерия с двумя композициями из мха" /></div>
+      <div className="hero-photo"><img src={founderPhoto} alt="Основательница арт-студии Калерия с двумя композициями из мха" /></div>
       <div className="hero-copy">
         <p className="eyebrow">Ботаническая арт-студия · Москва</p>
         <h1>Арт-студия<br /><em>Калерия</em></h1>
