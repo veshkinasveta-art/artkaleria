@@ -4,9 +4,10 @@ import { LockKeyhole } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { LogIn } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
-export function AdminLoginDialog({ className }: { className?: string }) {
+export function AdminLoginDialog({ className, asButton = false }: { className?: string; asButton?: boolean }) {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
@@ -29,7 +30,9 @@ export function AdminLoginDialog({ className }: { className?: string }) {
   }
 
   return <Dialog open={open} onOpenChange={setOpen}>
-    <DialogTrigger className={className}>Вход в админку</DialogTrigger>
+    {asButton
+      ? <DialogTrigger asChild><Button variant="outline" size="sm" className={className}><LogIn aria-hidden="true" />Админка</Button></DialogTrigger>
+      : <DialogTrigger className={className}>Вход в админку</DialogTrigger>}
     <DialogContent className="sm:max-w-md">
       <DialogHeader>
         <LockKeyhole className="mb-2 size-6 text-muted-foreground" aria-hidden="true" />

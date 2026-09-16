@@ -18,6 +18,7 @@ export function SiteHeader() {
       <nav className="hidden items-center gap-7 lg:flex">{links.map(([to, label]) => <Link key={to} to={to} className="text-sm text-foreground/75 transition-colors hover:text-primary" activeProps={{ className: "text-primary" }}>{label}</Link>)}</nav>
       <div className="flex items-center gap-2">
         <Button asChild variant="ghost" size="icon" className="relative" aria-label="Корзина"><Link to="/cart"><ShoppingBag />{count > 0 && <span className="absolute -right-1 -top-1 grid size-5 place-items-center rounded-full bg-accent text-[10px] text-accent-foreground">{count}</span>}</Link></Button>
+        <AdminLoginDialog asButton className="hidden md:inline-flex" />
         <Button asChild className="hidden sm:inline-flex"><Link to="/" hash="contact">Оставить заявку</Link></Button>
         <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setOpen((value) => !value)} aria-label={open ? "Закрыть меню" : "Открыть меню"}>{open ? <X /> : <Menu />}</Button>
       </div>
