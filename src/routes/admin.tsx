@@ -9,11 +9,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { formatPrice, productImages } from "@/lib/store-data";
 import { ProductForm, categories } from "@/components/admin/product-form";
+import { DashboardPanel } from "@/components/admin/dashboard-panel";
 import { removeProductImage } from "@/lib/product-images";
 
 type Lead = Tables<"leads">;
 type Product = Tables<"products">;
-type View = "leads" | "products";
+type View = "dashboard" | "leads" | "products";
 const kindLabels: Record<Lead["kind"], string> = { order: "Заказ", estimate: "Расчёт", workshop: "Мастер-класс", certificate: "Сертификат", callback: "Обратный звонок" };
 const statusLabels: Record<Lead["status"], string> = { new: "Новая", in_progress: "В работе", completed: "Завершена" };
 
