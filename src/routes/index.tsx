@@ -3,7 +3,8 @@ import { useMemo, useState } from "react";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LeadForm } from "@/components/lead-form";
-import { featuredProducts, formatPrice, productImages } from "@/lib/store-data";
+import { formatPrice, productImage, productImages } from "@/lib/store-data";
+import { listPublicProducts } from "@/lib/products.functions";
 import founderPhoto from "@/assets/kaleria-founder-curls.jpg";
 
 export const Route = createFileRoute("/")({
@@ -15,6 +16,9 @@ export const Route = createFileRoute("/")({
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ]}),
+  loader: () => listPublicProducts(),
+  errorComponent: () => <main className="page py-24"><h1 className="font-display text-5xl">Страница временно недоступна</h1></main>,
+  notFoundComponent: () => <main className="page py-24"><h1 className="font-display text-5xl">Страница не найдена</h1></main>,
   component: Index,
 });
 
