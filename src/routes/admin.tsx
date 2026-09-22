@@ -10,11 +10,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { formatPrice, productImages } from "@/lib/store-data";
 import { ProductForm, categories } from "@/components/admin/product-form";
 import { DashboardPanel } from "@/components/admin/dashboard-panel";
+import { ChatsPanel } from "@/components/admin/chats-panel";
 import { removeProductImage } from "@/lib/product-images";
 
 type Lead = Tables<"leads">;
 type Product = Tables<"products">;
-type View = "dashboard" | "leads" | "products";
+type View = "dashboard" | "leads" | "products" | "chats";
 const kindLabels: Record<Lead["kind"], string> = { order: "Заказ", estimate: "Расчёт", workshop: "Мастер-класс", certificate: "Сертификат", callback: "Обратный звонок" };
 const statusLabels: Record<Lead["status"], string> = { new: "Новая", in_progress: "В работе", completed: "Завершена" };
 
@@ -70,11 +71,12 @@ function AdminPage() {
       <div><p className="eyebrow">Арт-студия Калерия</p><h1 className="mt-3 font-display text-6xl font-medium">Управление</h1><p className="mt-3 text-sm text-muted-foreground">Новых заявок: {newLeads} · товаров на сайте: {products.filter((product) => product.published).length} из {products.length}</p></div>
       <div className="flex gap-2"><Button variant="outline" size="icon" title="Обновить" onClick={() => void load()}><RefreshCw /></Button><Button variant="outline" onClick={() => void signOut()}><LogOut /> Выйти</Button></div>
     </header>
-    <div className="my-8 flex flex-wrap gap-2"><Button variant={view === "dashboard" ? "default" : "outline"} onClick={() => setView("dashboard")}>Сводка</Button><Button variant={view === "leads" ? "default" : "outline"} onClick={() => setView("leads")}>Заказы и заявки · {leads.length}</Button><Button variant={view === "products" ? "default" : "outline"} onClick={() => setView("products")}>Товары · {products.length}</Button></div>
+    <div className="my-8 flex flex-wrap gap-2"><Button variant={view === "dashboard" ? "default" : "outline"} onClick={() => setView("dashboard")}>Сводка</Button><Button variant={view === "leads" ? "default" : "outline"} onClick={() => setView("leads")}>Заказы и заявки · {leads.length}</Button><Button variant={view === "products" ? "default" : "outline"} onClick={() => setView("products")}>Товары · {products.length}</Button><Button variant={view === "chats" ? "default" : "outline"} onClick={() => setView("chats")}>Чаты</Button></div>
     {message ? <p className="mb-5 border-l-2 border-accent pl-3 text-sm" role="status">{message}</p> : null}
     {view === "dashboard" ? <DashboardPanel leads={leads} products={products} onOpenLeads={(status) => { setLeadStatus(status); setView("leads"); }} /> : null}
     {view === "leads" ? <LeadsPanel key={leadStatus} leads={leads} setLeads={setLeads} notify={setMessage} initialStatus={leadStatus} /> : null}
     {view === "products" ? <ProductsPanel products={products} reload={load} notify={setMessage} /> : null}
+    {view === "chats" ? <ChatsPanel notify={setMessage} /> : null}
   </main>;
 }
 
