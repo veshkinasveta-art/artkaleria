@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
 import { AdminLoginDialog } from "@/components/admin-login-dialog";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const links = [
   ["/catalog", "Каталог"], ["/workshops", "Мастер-классы"], ["/certificates", "Сертификаты"], ["/delivery", "Доставка"],
@@ -14,7 +15,10 @@ export function SiteHeader() {
   const { count } = useCart();
   return <header className="sticky top-0 z-50 border-b border-border/70 bg-background/95 backdrop-blur">
     <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 lg:px-10">
-      <Link to="/" className="font-display text-3xl text-primary">Калерия</Link>
+      <div className="flex items-center gap-2 sm:gap-3">
+        <ThemeToggle />
+        <Link to="/" className="font-display text-3xl text-primary">Калерия</Link>
+      </div>
       <nav className="hidden items-center gap-7 lg:flex">{links.map(([to, label]) => <Link key={to} to={to} className="text-sm text-foreground/75 transition-colors hover:text-primary" activeProps={{ className: "text-primary" }}>{label}</Link>)}</nav>
       <div className="flex items-center gap-2">
         <Button asChild variant="ghost" size="icon" className="relative" aria-label="Корзина"><Link to="/cart"><ShoppingBag />{count > 0 && <span className="absolute -right-1 -top-1 grid size-5 place-items-center rounded-full bg-accent text-[10px] text-accent-foreground">{count}</span>}</Link></Button>
