@@ -69,11 +69,13 @@ export type Database = {
           featured: boolean
           id: string
           image_key: string
+          image_urls: string[]
           name: string
           price: number
           published: boolean
           sizes: string[]
           slug: string
+          sort_order: number
           updated_at: string
         }
         Insert: {
@@ -85,11 +87,13 @@ export type Database = {
           featured?: boolean
           id?: string
           image_key?: string
+          image_urls?: string[]
           name: string
           price: number
           published?: boolean
           sizes?: string[]
           slug: string
+          sort_order?: number
           updated_at?: string
         }
         Update: {
@@ -101,11 +105,13 @@ export type Database = {
           featured?: boolean
           id?: string
           image_key?: string
+          image_urls?: string[]
           name?: string
           price?: number
           published?: boolean
           sizes?: string[]
           slug?: string
+          sort_order?: number
           updated_at?: string
         }
         Relationships: []
