@@ -76,7 +76,7 @@ export function DashboardPanel({ leads, products, onOpenLeads }: { leads: Lead[]
 
     <section className="border border-border bg-card p-5">
       <h2 className="font-display text-3xl">Активность за 30 дней</h2>
-      <div className="mt-6 flex h-40 items-end gap-1">
+      <div className="mt-6 flex h-40 items-stretch gap-1">
         {stats.days.map((day) => <div key={day.date.toISOString()} className="flex flex-1 items-end justify-center" title={`${day.date.toLocaleDateString("ru-RU")}: ${day.count}`}>
           <div className="w-full bg-accent" style={{ height: `${Math.max(day.count ? 6 : 2, (day.count / stats.maxDay) * 100)}%`, opacity: day.count ? 1 : 0.25 }} />
         </div>)}
