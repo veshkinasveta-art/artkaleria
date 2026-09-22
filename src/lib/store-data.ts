@@ -19,7 +19,15 @@ export type Product = {
   sizes: string[];
   published: boolean;
   featured: boolean;
+  image_urls?: string[] | null;
+  sort_order?: number | null;
 };
+
+export const productImage = (product: Pick<Product, "image_key" | "image_urls">) =>
+  product.image_urls?.[0] ?? productImages[product.image_key] ?? productImages["florarium"]!;
+
+export const productGallery = (product: Pick<Product, "image_key" | "image_urls">) =>
+  product.image_urls?.length ? product.image_urls : [productImage(product)];
 
 export const categoryLabels: Record<string, string> = {
   florarium: "Флорариумы",
