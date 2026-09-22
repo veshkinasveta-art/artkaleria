@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "../lib/cart";
 import { SiteFooter, SiteHeader } from "../components/site-shell";
 import { Toaster } from "../components/ui/sonner";
+import { ChatWidget } from "../components/chat/chat-widget";
 
 function NotFoundComponent() {
   return (
@@ -130,6 +131,7 @@ function RootComponent() {
           <div className="grow"><Outlet /></div>
           <SiteFooter />
         </div>
+        <ChatWidget />
         <Toaster position="bottom-right" />
       </CartProvider>
     </QueryClientProvider>

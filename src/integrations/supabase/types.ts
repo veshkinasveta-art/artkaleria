@@ -14,6 +14,77 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          payload: Json
+          role: Database["public"]["Enums"]["chat_role"]
+          session_id: string
+        }
+        Insert: {
+          content?: string
+          created_at?: string
+          id?: string
+          payload?: Json
+          role: Database["public"]["Enums"]["chat_role"]
+          session_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          payload?: Json
+          role?: Database["public"]["Enums"]["chat_role"]
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "chat_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_sessions: {
+        Row: {
+          consent: boolean
+          created_at: string
+          customer_name: string
+          id: string
+          last_message_at: string
+          phone: string
+          status: Database["public"]["Enums"]["chat_status"]
+          unread_for_admin: boolean
+          visitor_token: string
+        }
+        Insert: {
+          consent?: boolean
+          created_at?: string
+          customer_name: string
+          id?: string
+          last_message_at?: string
+          phone: string
+          status?: Database["public"]["Enums"]["chat_status"]
+          unread_for_admin?: boolean
+          visitor_token: string
+        }
+        Update: {
+          consent?: boolean
+          created_at?: string
+          customer_name?: string
+          id?: string
+          last_message_at?: string
+          phone?: string
+          status?: Database["public"]["Enums"]["chat_status"]
+          unread_for_admin?: boolean
+          visitor_token?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           admin_note: string
@@ -149,6 +220,8 @@ export type Database = {
     }
     Enums: {
       app_role: "admin"
+      chat_role: "visitor" | "assistant" | "operator" | "system"
+      chat_status: "bot" | "needs_operator" | "operator" | "closed"
       lead_kind: "order" | "estimate" | "workshop" | "certificate" | "callback"
       lead_status: "new" | "in_progress" | "completed"
     }
@@ -279,6 +352,8 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin"],
+      chat_role: ["visitor", "assistant", "operator", "system"],
+      chat_status: ["bot", "needs_operator", "operator", "closed"],
       lead_kind: ["order", "estimate", "workshop", "certificate", "callback"],
       lead_status: ["new", "in_progress", "completed"],
     },
