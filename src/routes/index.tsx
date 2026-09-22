@@ -44,6 +44,11 @@ const extras: { value: string; add: number }[] = [
 const labels: Record<string, string> = { florarium: "Флорариумы", mossarium: "Моссариумы", panel: "Панно из мха", circle: "Круги с подсветкой", bonsai: "Бонсай" };
 
 function Index() {
+  const allProducts = Route.useLoaderData();
+  const featuredProducts = useMemo(() => {
+    const featured = allProducts.filter((product) => product.featured);
+    return (featured.length ? featured : allProducts).slice(0, 5);
+  }, [allProducts]);
   const [kind, setKind] = useState(types[0]!);
   const [size, setSize] = useState(sizes[2]!);
   const [filling, setFilling] = useState(fillings[0]!);
