@@ -3,7 +3,8 @@ import { useMemo, useState } from "react";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LeadForm } from "@/components/lead-form";
-import { featuredProducts, formatPrice, productImages } from "@/lib/store-data";
+import { formatPrice, productImage, productImages } from "@/lib/store-data";
+import { listPublicProducts } from "@/lib/products.functions";
 import founderPhoto from "@/assets/kaleria-founder-curls.jpg";
 
 export const Route = createFileRoute("/")({
@@ -15,6 +16,9 @@ export const Route = createFileRoute("/")({
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ]}),
+  loader: () => listPublicProducts(),
+  errorComponent: () => <main className="page py-24"><h1 className="font-display text-5xl">Страница временно недоступна</h1></main>,
+  notFoundComponent: () => <main className="page py-24"><h1 className="font-display text-5xl">Страница не найдена</h1></main>,
   component: Index,
 });
 
@@ -40,6 +44,11 @@ const extras: { value: string; add: number }[] = [
 const labels: Record<string, string> = { florarium: "Флорариумы", mossarium: "Моссариумы", panel: "Панно из мха", circle: "Круги с подсветкой", bonsai: "Бонсай" };
 
 function Index() {
+  const allProducts = Route.useLoaderData();
+  const featuredProducts = useMemo(() => {
+    const featured = allProducts.filter((product) => product.featured);
+    return (featured.length ? featured : allProducts).slice(0, 5);
+  }, [allProducts]);
   const [kind, setKind] = useState(types[0]!);
   const [size, setSize] = useState(sizes[2]!);
   const [filling, setFilling] = useState(fillings[0]!);
@@ -60,7 +69,7 @@ function Index() {
 
     <section className="page py-20 md:py-28">
       <div className="section-intro"><p className="eyebrow">Коллекция</p><h2>Не декор.<br />Живые объекты.</h2><p>В каждой работе — естественная фактура, ручная сборка и характер конкретного пространства.</p></div>
-      <div className="gallery-grid">{featuredProducts.map((product, index) => <Link key={product.id} to="/catalog/$slug" params={{ slug: product.slug }} className={`gallery-item gallery-item-${index + 1}`}><div><img src={productImages[product.image_key]} alt={labels[product.category]} loading={index > 1 ? "lazy" : "eager"} /></div><p className="eyebrow">{labels[product.category]}</p><h3>{index === 0 ? "Живой миниатюрный мир в стекле" : product.description}</h3><p className="gallery-price">от {formatPrice(product.price)} <ArrowRight /></p></Link>)}</div>
+      <div className="gallery-grid">{featuredProducts.map((product, index) => <Link key={product.id} to="/catalog/$slug" params={{ slug: product.slug }} className={`gallery-item gallery-item-${index + 1}`}><div><img src={productImage(product)} alt={product.name} loading={index > 1 ? "lazy" : "eager"} /></div><p className="eyebrow">{labels[product.category]}</p><h3>{index === 0 ? "Живой миниатюрный мир в стекле" : product.description}</h3><p className="gallery-price">от {formatPrice(product.price)} <ArrowRight /></p></Link>)}</div>
       <Button asChild variant="outline" size="lg" className="mt-12"><Link to="/catalog">Смотреть всю коллекцию <ArrowRight /></Link></Button>
     </section>
 
