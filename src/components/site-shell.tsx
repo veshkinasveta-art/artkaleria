@@ -17,7 +17,7 @@ export function SiteHeader() {
     <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-5 lg:px-10">
       <div className="flex items-center gap-2 sm:gap-3">
         <ThemeToggle />
-        <Link to="/" className="font-display text-3xl text-primary">Калерия</Link>
+        <Link to="/" className="font-display text-[1.95rem]/[1.05] text-primary sm:text-[2.35rem]/[1.05]">Калерия</Link>
       </div>
       <nav className="hidden items-center gap-7 lg:flex">{links.map(([to, label]) => <Link key={to} to={to} className="text-sm text-foreground/75 transition-colors hover:text-primary" activeProps={{ className: "text-primary" }}>{label}</Link>)}</nav>
       <div className="flex items-center gap-2">
@@ -34,7 +34,7 @@ export function SiteHeader() {
 export function SiteFooter() {
   return <footer className="bg-primary text-primary-foreground">
     <div className="mx-auto grid max-w-[1440px] gap-10 px-5 py-14 md:grid-cols-[1.4fr_1fr_1fr] lg:px-10">
-      <div><p className="font-display text-4xl">Калерия</p><p className="mt-4 max-w-sm text-sm text-primary-foreground/70">Живые композиции и природные арт-объекты, собранные вручную в Москве.</p></div>
+      <div><p className="font-display text-[2.8rem]/[1.05]">Калерия</p><p className="mt-4 max-w-sm text-sm text-primary-foreground/70">Живые композиции и природные арт-объекты, собранные вручную в Москве.</p></div>
       <div className="grid gap-2 text-sm"><Link to="/catalog">Каталог</Link><Link to="/workshops">Мастер-классы</Link><Link to="/certificates">Сертификаты</Link><Link to="/delivery">Доставка</Link></div>
       <div className="grid gap-2 text-sm"><a href="tel:+79266045274">+7 926 604-52-74</a><a href="mailto:hello@kaleria.studio">hello@kaleria.studio</a><p>Москва, Большая Никитская, 12</p><p>Пн–Сб, 10:00–19:00</p></div>
     </div>
